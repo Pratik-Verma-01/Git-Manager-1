@@ -1,0 +1,41 @@
+name: client
+description: Git Manager — manage your GitHub repositories from your phone.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management & routing
+  flutter_riverpod: ^2.6.1
+  go_router: ^14.6.2
+
+  # Networking
+  dio: ^5.7.0
+
+  # Auth: secure on-device storage for the app's own session token
+  # (never the raw GitHub token — see backend/README.md), and a system
+  # browser tab for the GitHub sign-in page.
+  flutter_secure_storage: ^9.2.2
+  flutter_web_auth_2: ^4.1.0
+
+  # UI polish
+  cached_network_image: ^3.4.1
+  shimmer: ^3.0.0
+  intl: ^0.19.0
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/app_logo.png
