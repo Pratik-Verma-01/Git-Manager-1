@@ -81,7 +81,7 @@ class _RepoDetailScreenState extends ConsumerState<RepoDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: AnimatedAuroraBackground(
+      body: StaticAuroraBackground(
         child: SafeArea(
           child: Column(
             children: [

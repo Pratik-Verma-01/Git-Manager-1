@@ -4,6 +4,7 @@ import '../../core/format.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/glass/glass_widgets.dart';
 import '../auth/auth_controller.dart';
+import '../repo_detail/repo_detail_screen.dart';
 import '../repositories/repo_provider.dart';
 import '../shell/app_shell.dart';
 
@@ -155,7 +156,9 @@ class _RecentRepos extends ConsumerWidget {
             (repo) => GlassCard(
               margin: const EdgeInsets.only(bottom: AppSpacing.sm),
               blurred: false, // up to 3 of these stack here — see GlassCard.blurred
-              onTap: () => ref.read(selectedTabProvider.notifier).state = 1,
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => RepoDetailScreen(repo: repo)),
+              ),
               child: Row(
                 children: [
                   Container(

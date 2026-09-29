@@ -195,7 +195,7 @@ class _FileEditorScreenState extends ConsumerState<FileEditorScreen> {
       },
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: AnimatedAuroraBackground(
+        body: StaticAuroraBackground(
           child: SafeArea(
             child: Column(
               children: [

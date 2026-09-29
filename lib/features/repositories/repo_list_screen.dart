@@ -5,6 +5,7 @@ import '../../core/format.dart';
 import '../../core/network/api_client.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/glass/glass_widgets.dart';
+import '../repo_detail/repo_detail_screen.dart';
 import 'repo_models.dart';
 import 'repo_provider.dart';
 
@@ -183,10 +184,9 @@ class _RepoCard extends ConsumerWidget {
     return GlassCard(
       margin: const EdgeInsets.only(bottom: AppSpacing.sm),
       blurred: false, // a scrolling list of these is the exact case GlassCard.blurred exists for
-      onTap: () {
-        // Repository detail (file explorer, editor, commits, PRs) lands in
-        // the next update — this card is fully wired to real data already.
-      },
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => RepoDetailScreen(repo: repo)),
+      ),
       onLongPress: () => _showRepoActions(context, ref, repo),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

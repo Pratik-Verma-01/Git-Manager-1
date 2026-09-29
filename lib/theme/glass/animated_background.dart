@@ -6,6 +6,38 @@ import '../app_theme.dart';
 /// base plus a few soft, slowly-drifting blurred color blobs. One shared
 /// AnimationController for the whole app (see [AuroraBackgroundScope])
 /// keeps this to a single ticker rather than one per screen.
+/// A one-off, non-animated version of the app's background gradient — for
+/// screens pushed on top of the tab shell (repo detail, file editor).
+/// AppShell's own AnimatedAuroraBackground keeps running underneath them
+/// (it's hidden, not unmounted, since Navigator.push doesn't remove it),
+/// so giving these screens their own animated copy on top just doubles
+/// the per-frame painting cost for zero visible benefit — this was the
+/// main source of stutter when opening a repo. A static gradient looks
+/// effectively identical at a glance and costs nothing per frame.
+class StaticAuroraBackground extends StatelessWidget {
+  const StaticAuroraBackground({super.key, required this.child});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [AppColors.backgroundBase, AppColors.backgroundIndigo, AppColors.backgroundViolet],
+            ),
+          ),
+        ),
+        child,
+      ],
+    );
+  }
+}
+
 class AnimatedAuroraBackground extends StatelessWidget {
   const AnimatedAuroraBackground({super.key, required this.child});
 
@@ -95,11 +127,12 @@ class _Blob {
   final double speed;
 }
 
+// Three blobs instead of four — one fewer gradient shader to build every
+// animation frame, for a bit more headroom on weaker GPUs.
 const _blobs = [
-  _Blob(color: AppColors.accentViolet, baseCenter: Offset(0.22, 0.20), radius: 220, phase: 0, speed: 1.0),
-  _Blob(color: AppColors.accentBlue, baseCenter: Offset(0.82, 0.30), radius: 260, phase: 2.1, speed: 0.8),
-  _Blob(color: AppColors.accentPink, baseCenter: Offset(0.30, 0.82), radius: 200, phase: 4.2, speed: 1.15),
-  _Blob(color: AppColors.accentCyan, baseCenter: Offset(0.78, 0.85), radius: 240, phase: 1.4, speed: 0.9),
+  _Blob(color: AppColors.accentViolet, baseCenter: Offset(0.22, 0.20), radius: 230, phase: 0, speed: 1.0),
+  _Blob(color: AppColors.accentBlue, baseCenter: Offset(0.82, 0.35), radius: 260, phase: 2.1, speed: 0.8),
+  _Blob(color: AppColors.accentCyan, baseCenter: Offset(0.5, 0.9), radius: 250, phase: 1.4, speed: 0.9),
 ];
 
 class _AuroraPainter extends CustomPainter {

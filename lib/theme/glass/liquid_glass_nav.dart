@@ -73,7 +73,7 @@ class _LiquidGlassNavBarState extends State<LiquidGlassNavBar> with SingleTicker
         return ClipRRect(
           borderRadius: BorderRadius.circular(AppRadius.pill),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 34, sigmaY: 34),
+            filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
             child: Container(
               // A gradient "border" rather than a flat one: brighter at the
               // top, fading out — the thin glass highlight the brief asks
@@ -85,7 +85,7 @@ class _LiquidGlassNavBarState extends State<LiquidGlassNavBar> with SingleTicker
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.white.withOpacity(0.30), Colors.white.withOpacity(0.05)],
+                  colors: [Colors.white.withOpacity(0.22), Colors.white.withOpacity(0.03)],
                 ),
               ),
               child: ClipRRect(
@@ -96,7 +96,7 @@ class _LiquidGlassNavBarState extends State<LiquidGlassNavBar> with SingleTicker
                   // — this is meant to read as barely-there glass, not a
                   // grey panel, with the app's own background gradient
                   // still visible through it.
-                  color: Colors.white.withOpacity(0.045),
+                  color: Colors.white.withOpacity(0.02),
                   child: Stack(
                     children: [
                       // Diagonal light/reflection variation — brighter
