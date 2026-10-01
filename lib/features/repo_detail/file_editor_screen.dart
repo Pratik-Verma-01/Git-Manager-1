@@ -4,6 +4,7 @@ import '../../core/network/api_client.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/glass/animated_background.dart';
 import '../../theme/glass/glass_widgets.dart';
+import '../auth/auth_controller.dart';
 import '../repositories/repo_models.dart';
 
 /// Opens one repository file for editing. Loading, saving (a real commit
